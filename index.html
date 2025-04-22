@@ -3,105 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SIM Data Lookup</title>
+  <title>Pak Sim Data</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
     body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(90deg, #141e30, #243b55);
+      background-size: 400% 400%;
+      animation: backgroundAnimate 8s infinite;
       margin: 0;
       padding: 0;
-      background: #000;
-      font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      animation: fadeIn 1s ease-in-out;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    .box {
-      background: #111;
-      border: 2px solid red;
-      box-shadow: 0 0 25px red;
-      padding: 30px 20px;
+    @keyframes backgroundAnimate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
       border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      padding: 25px;
       width: 100%;
       max-width: 400px;
       text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .box h2 {
-      color: red;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .box input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 20px;
-      font-size: 16px;
-      background: #333;
       color: white;
-      box-shadow: inset 0 0 5px red;
     }
 
-    .box button {
-      width: 100%;
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    }
+
+    input[type="text"] {
+      width: 80%;
       padding: 12px;
-      border: none;
-      border-radius: 8px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      color: white;
       margin: 10px 0;
       font-size: 16px;
-      font-weight: bold;
+    }
+
+    button {
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
-      color: white;
-      background: linear-gradient(90deg, #c00000, #ff0000);
-      box-shadow: 0 0 15px red;
-      transition: 0.3s;
-    }
-
-    .box button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(90deg, #ff0000, #c00000);
-    }
-
-    .whatsapp-btn {
-      background: linear-gradient(90deg, #25D366, #128C7E);
-      box-shadow: 0 0 15px #25D366;
-      color: white;
-    }
-
-    #responseBox {
-      color: white;
-      margin-top: 20px;
       font-size: 16px;
-      display: none;
-      animation: fadeIn 1s ease-in-out;
-      background: #222;
-      border: 1px solid #444;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: left;
+      margin-top: 10px;
+      width: 50%;
+      animation: buttonGlow 2s infinite alternate;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    @keyframes buttonGlow {
+      0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+      100% { box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
+    }
+
+    .result {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 14px;
+      text-align: left;
+      white-space: pre-line;
+      display: none;
+    }
+
+    .share-btn {
+      margin-top: 10px;
+      background: linear-gradient(90deg, #25D366, #128C7E);
+      box-shadow: 0 0 10px #25D366;
+      color: white;
+      display: none;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      background: #111;
+      box-shadow: 0 -5px 20px #0ff;
+      width: 100%;
+    }
+
+    .footer h2 {
+      font-size: 1.5rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+      margin-bottom: 10px;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 15px;
+      color: #fff;
+      background: #0ff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 15px #0ff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px #0ff;
+      background: #08f;
+    }
+
+    .developer {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: yellow;
+    }
+
+    .developer span {
+      display: block;
+      font-size: 1.8rem;
+      font-family: 'Pacifico', cursive;
+      color: red;
+      text-shadow: 0 0 10px red, 0 0 20px red;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>🔍 Search SIM Details</h2>
-    <input type="text" id="number" placeholder="Enter phone number" required />
-    <button onclick="fetchData()">🔎 Get Details</button>
+  <div class="container">
+    <h1>𝐏𝐫𝐨-𝐇𝐚𝐬𝐬𝐚𝐧 𝗦𝗶𝗺 𝗗𝗮𝘁𝗮</h1>
+    <input type="text" id="number" placeholder="Enter mobile number" required />
+    <button onclick="fetchData()">Search</button>
+    <div id="responseBox" class="result"></div>
+    <button id="shareButton" class="share-btn" onclick="shareWhatsApp()">📲 Share on WhatsApp</button>
+  </div>
 
-    <div id="responseBox"></div>
-
-    <button id="shareButton" class="whatsapp-btn" onclick="shareWhatsApp()" style="display: none;">📲 Share on WhatsApp</button>
-    <button id="channelButton" class="whatsapp-btn" onclick="window.open('https://whatsapp.com/channel/0029ValPMVxLSmbbyGEtGX2j')">📢 Join WhatsApp Channel</button>
+  <div class="footer">
+    <h2>Join Our Channels</h2>
+    <div class="social-links">
+      <a href="https://t.me/princehassantrader" target="_blank">Telegram</a>
+      <a href="https://whatsapp.com/channel/0029ValPMVxLSmbbyGEtGX2j" target="_blank">WhatsApp Channel</a>
+      <a href="https://wa.me/923168598809" target="_blank">WhatsApp Me</a>
+    </div>
+    <div class="developer">
+      DEVELOPER:
+      <span>PROFESSOR-HASSAN OFFICIAL</span>
+    </div>
   </div>
 
   <script>
@@ -135,12 +196,12 @@
           responseBox.style.display = "block";
           shareButton.style.display = "inline-block";
         } else {
-          responseBox.innerHTML = `<p style="color: yellow; font-size: 18px; font-weight: bold;">Data Not Found</p>`;
+          responseBox.innerHTML = `<p style="color: yellow;">Data Not Found</p>`;
           responseBox.style.display = "block";
           shareButton.style.display = "none";
         }
       } catch (e) {
-        responseBox.innerHTML = `<p style="color: red; font-size: 18px; font-weight: bold;">Error fetching data. Please try again later.</p>`;
+        responseBox.innerHTML = `<p style="color: red;">Error fetching data.</p>`;
         responseBox.style.display = "block";
         shareButton.style.display = "none";
       }
