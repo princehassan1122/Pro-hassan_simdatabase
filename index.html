@@ -2,217 +2,485 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pak Sim Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YARAM MODS| Premium Intelligence Network</title>
+  <meta name="description" content="YARAM MODS Data - Premium SIM Database, CNIC Verification, and Intelligence Services" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(90deg, #141e30, #243b55);
-      background-size: 400% 400%;
-      animation: backgroundAnimate 8s infinite;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      min-height: 100vh;
+    :root{
+      --bg:#070b11;
+      --light:#e8f1ff;
+      --muted:#a7b7cc;
+      --primary:#22ffd0;
+      --blue:#3ea7ff;
+      --pink:#ff4d9a;
+      --ring: 0 0 0 2px rgba(34,255,208,.25), 0 0 28px rgba(34,255,208,.16);
+      --glass: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.14);
+      --shadow: 0 12px 40px rgba(0,0,0,.55);
     }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial;'letter-spacing':.2px;background:var(--bg);color:var(--light);overflow-x:hidden}
+    a{color:inherit; text-decoration: none;}
 
-    @keyframes backgroundAnimate {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* ===== GLOBAL SCROLLBAR ===== */
+    ::-webkit-scrollbar{width:10px;height:10px;background:#05070c}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--blue),var(--primary));border-radius:10px}
+
+    /* ===== BACKGROUND STACK ===== */
+    .bg-wrap{position:fixed;inset:0;z-index:-10;overflow:hidden}
+    .bg-clouds{position:absolute;inset:-20%;filter:blur(40px) saturate(120%);background:
+      radial-gradient(900px 600px at 15% 10%, rgba(34,255,208,.10), transparent 60%),
+      radial-gradient(1100px 700px at 85% 20%, rgba(62,167,255,.10), transparent 60%),
+      radial-gradient(1000px 700px at 50% 110%, rgba(255,77,154,.08), transparent 60%),
+      linear-gradient(180deg,#05080d,#09121d 40%, #070b11 70%)
+    ;animation:cloudHue 24s ease-in-out infinite alternate}
+    @keyframes cloudHue{from{filter:hue-rotate(0)}to{filter:hue-rotate(25deg) saturate(140%)}}
+    .bg-grid, .bg-grid::after{position:absolute;inset:0;content:"";pointer-events:none}
+    .bg-grid{
+      background-size:60px 60px, 60px 60px;
+      background-image:linear-gradient(rgba(34,255,208,.06) 1px, transparent 1px),
+                       linear-gradient(90deg, rgba(34,255,208,.06) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.9), transparent 70%);
     }
+    .bg-grid::after{background:linear-gradient(transparent, rgba(255,255,255,.06), transparent);background-size:100% 6px;animation:scan 5s linear infinite}
+    @keyframes scan{from{background-position:0 -100%}to{background-position:0 200%}}
+    #bg-particles, #bg-waves{position:absolute;inset:0;display:block}
 
-    .container {
-      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-      border-radius: 15px;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-      padding: 25px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      color: white;
+    /* ===== LAYOUT ===== */
+    .container{max-width:1200px;margin:0 auto;padding:28px 18px 80px}
+    header{position:relative;text-align:center;margin:56px 0 24px}
+
+    /* ===== NEW DROP-IN ANIMATION ===== */
+    @keyframes dropIn {
+      from {
+        opacity: 0;
+        transform: translateY(-80px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    
+    /* ===== BRAND ANIMATION ===== */
+    .brand{display:inline-block; position:relative;}
+    .brand-title{
+      /* === Font Change === */
+      font-family: 'Great Vibes', cursive; /* New signature font */
+      font-weight: 500; /* Adjusted font weight */
+      font-size: clamp(60px, 12vw, 150px); /* Increased size for better impact */
+      letter-spacing: 2px; /* Reduced letter spacing for a script font */
+      line-height: 1;
+      
+      /* === Visual Effects (Slightly adjusted for new font) === */
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(34,255,208,.9); /* Thinner stroke */
+      text-shadow: 0 0 24px rgba(34,255,208,.35), 0 0 60px rgba(62,167,255,.25);
+      background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(34,255,208,.95), rgba(62,167,255,.95));
+      background-size: 300% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      
+      /* === Animation: New Drop-In + Existing Neon Flow === */
+      animation: 
+        dropIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards, /* The new entry animation */
+        neonFlow 7s ease-in-out 1.2s infinite; /* The old neon animation, delayed to start after drop-in */
     }
-
-    input[type="text"] {
-      width: 80%;
-      padding: 12px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      margin: 10px 0;
-      font-size: 16px;
+    @keyframes neonFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .brand-title::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: repeating-linear-gradient( to bottom, rgba(255,255,255,.14) 0 2px, rgba(255,255,255,0) 3px 8px );
+      mix-blend-mode:screen; opacity:.35; animation:scanText 3.2s linear infinite;
+      mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
     }
+    @keyframes scanText{from{transform:translateY(-10%)}to{transform:translateY(10%)}}
 
-    button {
-      background: rgba(255, 0, 0, 0.8);
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-      width: 50%;
-      animation: buttonGlow 2s infinite alternate;
-    }
-
-    @keyframes buttonGlow {
-      0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-      100% { box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
-    }
-
-    .result {
-      margin-top: 20px;
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
-      border-radius: 15px;
-      font-size: 14px;
-      text-align: left;
-      white-space: pre-line;
-      display: none;
-    }
-
-    .share-btn {
-      margin-top: 10px;
-      background: linear-gradient(90deg, #25D366, #128C7E);
-      box-shadow: 0 0 10px #25D366;
-      color: white;
-      display: none;
-    }
-
-    .footer {
-      margin-top: 50px;
-      padding: 20px;
-      text-align: center;
-      background: #111;
-      box-shadow: 0 -5px 20px #0ff;
-      width: 100%;
-    }
-
-    .footer h2 {
-      font-size: 1.5rem;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
-      margin-bottom: 10px;
-    }
-
-    .social-links a {
+    /* ===== NEW TYPING ANIMATION FOR SUBTITLE ===== */
+    .subtitle {
+      margin-top:10px; font-weight:600; letter-spacing:8px; text-transform:uppercase; font-size:.95rem; color:var(--muted);
       display: inline-block;
-      margin: 5px;
-      padding: 10px 15px;
-      color: #fff;
-      background: #0ff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 15px #0ff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid var(--primary);
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink-caret .75s step-end infinite;
+      animation-delay: .5s;
     }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--primary); } }
 
-    .social-links a:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #0ff;
-      background: #08f;
+    /* ===== VERIFIED STRIP ===== */
+    .verified{
+      margin:18px auto 34px;max-width:820px;display:flex;gap:14px;align-items:center;justify-content:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border:1px solid var(--stroke); border-radius:16px; padding:12px 16px; box-shadow:var(--shadow)
     }
+    .verified svg{width:28px;height:28px;filter:drop-shadow(0 0 10px rgba(62,167,255,.7))}
+    .owner{color:var(--muted); font-size:.95rem; font-weight: 500;}
 
-    .developer {
-      margin-top: 15px;
-      font-size: 0.9rem;
-      color: yellow;
+    /* ===== CARDS / GLASS ===== */
+    .main-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));gap:18px;}
+    .card{position:relative;border-radius:20px;padding:22px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--stroke); backdrop-filter: blur(14px) saturate(130%); box-shadow: var(--shadow);
+      transform: translateY(14px) scale(.98); opacity:0; transition:.6s cubic-bezier(.22,1,.36,1);
+      display: flex; flex-direction: column;
     }
+    .card.reveal{transform:none;opacity:1}
+    .card h2{
+      font-family:'Orbitron',sans-serif; font-size:1.05rem; letter-spacing:2px; text-transform:uppercase; text-align:center; color:var(--primary)
+    }
+    .card h2 + .hr{width:70px;height:2px;margin:10px auto 16px;background:linear-gradient(90deg,var(--blue),var(--primary)); filter:drop-shadow(0 0 10px rgba(34,255,208,.45))}
+    .card p {text-align: center; color: var(--muted); line-height: 1.6;}
 
-    .developer span {
-      display: block;
-      font-size: 1.8rem;
-      font-family: 'Pacifico', cursive;
-      color: red;
-      text-shadow: 0 0 10px red, 0 0 20px red;
-      margin-top: 5px;
+    /* ===== FORM ===== */
+    .form{display:grid; gap:12px; margin-top:10px}
+    .input-wrap{position:relative}
+    .input-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.85;color:var(--primary)}
+    input#phone{width:100%;padding:16px 16px 16px 44px;border-radius:12px;border:1px solid rgba(34,255,208,.35);background:rgba(7,11,17,.4);color:var(--light);
+      font-size:1rem;letter-spacing:1px;outline:none;transition:.25s;font-family:'Orbitron',sans-serif;text-align:center}
+    input#phone:focus{box-shadow:var(--ring);border-color:var(--primary)}
+    .input-guidance{font-size: .8rem; text-align: center; color: var(--muted); margin-top: 8px; opacity: 0.7;}
+    .btn{
+      border:none;border-radius:12px;cursor:pointer;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;font-family:'Orbitron',sans-serif;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px;width:100%;
+      background:linear-gradient(90deg,var(--blue),var(--primary));color:#041016;box-shadow:0 14px 36px rgba(62,167,255,.28), inset 0 0 0 1px rgba(255,255,255,.08);
+      transition:transform .15s ease, box-shadow .25s ease
+    }
+    .btn:hover{transform:translateY(-2px) scale(1.01); box-shadow: 0 20px 44px rgba(62,167,255,.33), 0 8px 22px rgba(34,255,208,.28)}
+
+    /* ===== SOCIAL ICONS ===== */
+    .social-icons {display: flex; justify-content: center; gap: 16px; margin-top: 20px;}
+    .social-icon {width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--light); position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid var(--stroke); background: var(--glass); box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+    .social-icon.whatsapp:hover {background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 0 15px rgba(37, 211, 102, 0.6);}
+    .social-icon.telegram:hover {background: linear-gradient(135deg, #0088cc, #005580); box-shadow: 0 0 15px rgba(0, 136, 204, 0.6);}
+    .social-icon.email:hover {background: linear-gradient(135deg, #EA4335, #c71610); box-shadow: 0 0 15px rgba(234, 67, 53, 0.6);}
+
+    /* ===== RESULT ===== */
+    #result{margin-top:14px;border-radius:14px;border:1px solid rgba(34,255,208,.25);background:rgba(7,11,17,.45);display:none}
+    #result.show{display:block}
+    .result-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:16px;margin:14px;box-shadow:inset 0 0 0 1px rgba(34,255,208,.10)}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed rgba(34,255,208,.16);font-family:'Poppins',sans-serif}
+    .row:last-child{border-bottom:none}
+    .label{font-weight:800;color:var(--primary);font-family:'Orbitron',sans-serif;font-size:.9rem}
+    .value{color:var(--light);font-size:.95rem;word-break:break-word;text-align:right}
+    .msg{padding:20px;text-align:center;font-family:'Poppins',sans-serif}
+    .msg.loading{color:var(--primary)}
+    .msg.error{color:#ff6b7a}
+
+    /* ===== SERVICES LIST & FAQ ===== */
+    .feature-list { list-style: none; padding: 0; margin-top: 8px; text-align: left;}
+    .feature-list li { padding: 10px 0; border-bottom: 1px solid var(--stroke); display: flex; align-items: center; color: var(--muted);}
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list i { margin-right: 12px; color: var(--primary); width: 20px; text-align: center;}
+    .faq-item { text-align: left; margin-bottom: 12px; }
+    .faq-item strong { color: var(--primary); display: block; margin-bottom: 4px; }
+    .faq-item p { text-align: left; font-size: .9rem; }
+
+
+    /* ===== FOOTER & WA FLOAT ===== */
+    footer{padding:28px 18px 40px;text-align:center;font-size:.86rem;color:rgba(255,255,255,.64);position:relative; margin-top: 30px;}
+    footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:240px;height:1px;background:linear-gradient(90deg,transparent,var(--primary),transparent);opacity:.6}
+    .footer-links { margin: 10px 0; display: flex; justify-content: center; gap: 20px; }
+    .footer-links a { color: var(--muted); transition: color .2s; }
+    .footer-links a:hover { color: var(--primary); }
+
+    .floating-wa{position:fixed;bottom:22px;right:22px;width:60px;height:60px;background:linear-gradient(135deg,var(--blue),var(--primary));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000;font-size:1.7rem;box-shadow:0 10px 26px rgba(0,0,0,.35);z-index:50;transition:.2s}
+    .floating-wa:hover{transform:scale(1.08) translateY(-2px)}
+
+    /* ===== AD MODAL ===== */
+    .modal{position:fixed;inset:0;display:none;opacity:0;align-items:center;justify-content:center;z-index:1000;background:rgba(5,10,16,.92);backdrop-filter:blur(8px);transition:opacity .3s}
+    .modal-content{background:rgba(10,18,26,.85);border:1px solid var(--primary);box-shadow:0 0 30px rgba(34,255,208,.45);border-radius:14px;width:92%;max-width:900px;height:78vh;padding:18px;display:flex;flex-direction:column;transform:scale(.92);transition:transform .3s}
+    .modal.show{display:flex}
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition: none !important;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>𝐏𝐫𝐨-𝐇𝐚𝐬𝐬𝐚𝐧 𝗦𝗶𝗺 𝗗𝗮𝘁𝗮</h1>
-    <input type="text" id="number" placeholder="Enter mobile number" required />
-    <button onclick="fetchData()">Search</button>
-    <div id="responseBox" class="result"></div>
-    <button id="shareButton" class="share-btn" onclick="shareWhatsApp()">📲 Share on WhatsApp</button>
+  <div class="bg-wrap">
+    <canvas id="bg-waves"></canvas>
+    <div class="bg-clouds"></div>
+    <div class="bg-grid"></div>
+    <canvas id="bg-particles"></canvas>
   </div>
 
-  <div class="footer">
-    <h2>Join Our Channels</h2>
-    <div class="social-links">
-      <a href="https://t.me/princehassantrader" target="_blank">Telegram</a>
-      <a href="https://whatsapp.com/channel/0029ValPMVxLSmbbyGEtGX2j" target="_blank">WhatsApp Channel</a>
-      <a href="https://wa.me/923168598809" target="_blank">WhatsApp Me</a>
-    </div>
-    <div class="developer">
-      DEVELOPER:
-      <span>PROFESSOR-HASSAN OFFICIAL</span>
+  <div class="modal" id="adModal">
+    <div class="modal-content">
+      <div style="text-align:center;margin-bottom:10px">
+        <h3 style="color:var(--primary);letter-spacing:2px">SPONSORED MESSAGE</h3>
+        <p style="color:var(--muted)">Please wait... Closing in <span id="countdown" style="font-weight:800;color:var(--light)">10</span> seconds.</p>
+      </div>
+      <div style="flex:1">
+        <iframe src="https://www.profitableratecpm.com/yh9i5qeb8?key=2cca71d2c62ad0a5a48e7a81cc5f8c48" title="Advertisement" style="width:100%;height:100%;border:none;border-radius:10px"></iframe>
+      </div>
     </div>
   </div>
+
+  <div class="container">
+    <header>
+      <div class="brand" id="brand">
+        <div class="brand-title">YARAM MODS</div>
+      </div>
+      <div class="subtitle" id="subtitle">OWNER = YARAM E HASSAN</div>
+    </header>
+
+    <div class="verified">
+      <svg viewBox="0 0 512 512" aria-hidden="true">
+        <defs><linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3ea7ff"/><stop offset="100%" stop-color="#9bd4ff"/></linearGradient></defs>
+        <path d="M256 24l54.2 38.4 65.5-6.5 24.7 61 61 24.7-6.5 65.5L512 256l-57.1 48.9 6.5 65.5-61 24.7-24.7 61-65.5-6.5L256 488l-54.2-38.4-65.5 6.5-24.7-61-61-24.7 6.5-65.5L0 256l57.1-48.9-6.5-65.5 61-24.7 24.7-61 65.5 6.5L256 24z" fill="url(#gradBlue)"/>
+        <path d="M226 314l-56-56 34-34 22 22 86-86 34 34-120 120z" fill="#fff"/>
+      </svg>
+      <div class="owner">𝑃𝐴𝐾 𝑆𝐼𝑀 𝐷𝐴𝑇𝐴 𝐵𝐴𝑆𝐸</div>
+    </div>
+
+    <div class="main-grid">
+  <section class="card" id="searchCard" style="grid-column: 1 / -1;">
+    <h2>Sim Database Lookup
+    <p>Official site ☟︎︎︎</p>
+    <a href="https://yarammods.site/" target="_blank" rel="noopener noreferrer">click here</h2></a>
+  </section>
+    </div>
+    <div class="hr"></div>
+        <form id="form" class="form" autocomplete="off">
+          <div class="input-wrap">
+            <i class="fa-solid fa-shield-halved"></i>
+            <input id="phone" inputmode="numeric" placeholder="3168598809" maxlength="13" />
+          </div>
+          <p class="input-guidance">Enter number without 0 or +92 (e.g. 3168598809)</p>
+          <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </form>
+        <div class="social-icons">
+          <a href="https://wa.me/923168598809" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://t.me/yaramxkazmi" target="_blank" class="social-icon telegram" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="mailto:support@blackworld.net" class="social-icon email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div id="result"></div>
+      </section>
+
+      <section class="card">
+        <h2>About Us</h2>
+        <div class="hr"></div>
+        <p>YARAM  WORLD IS ONE OF THE TOP HACKERS TEAM IN PAKISTAN WHICH PROVIDE 💯 FREE TOOLS AND MANY TRICKS.</p>
+      </section>
+
+      <section class="card">
+        <h2>Our Services</h2>
+        <div class="hr"></div>
+        <ul class="feature-list">
+            <li><i class="fa-solid fa-shield-halved"></i> CNIC / SIM Verification</li>
+            <li><i class="fa-solid fa-database"></i> FAKE SIMS + PASSPORT DETAILS & LIVE LOCATION </li>
+            <li><i class="fa-solid fa-clock-rotate-left"></i> CDR OF ALL NETWORS</li>
+            <li><i class="fa-solid fa-lock"></i> ALL NADRA DATA AVAILABLE</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Pricing Plans</h2>
+        <div class="hr"></div>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-magnifying-glass"></i> <strong>Free Search:</strong> Limited access to basic data. Results may vary.</li>
+          <li><i class="fa-solid fa-star"></i> <strong>Premium Search:</strong> Price PKR 200. Guaranteed, detailed results including CNIC, Address, and more.</li>
+          <li><i class="fa-solid fa-file-invoice"></i> <strong>Full Report:</strong> Custom pricing. Contact us for comprehensive intelligence reports.</li>
+        </ul>
+      </section>
+  </div>
+  </div>
+
+  <a href="https://whatsapp.com/channel/0029VbAfHcDC1FuEJJ7N513X" target="_blank" class="floating-wa" aria-label="Our WhatsApp Channel">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <footer>
+    <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <span>|</span>
+        <a href="#">Terms of Service</a>
+    </div>
+    <p>© 2025 YARAM MODS INTELLIGENCE NETWORK | ALL RIGHTS RESERVED</p>
+    <p>v5.0.0 | OPERATION SPECTRE</p>
+  </footer>
 
   <script>
-    async function fetchData() {
-      const number = document.getElementById("number").value.trim();
-      const responseBox = document.getElementById("responseBox");
-      const shareButton = document.getElementById("shareButton");
+    // ===== UTIL =====
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
 
-      if (!number) {
-        alert("Please enter a phone number.");
-        return;
+    // ===== HEAVY BACKGROUND: WAVEFIELD (canvas) =====
+    (function Waves(){
+      const c = document.getElementById('bg-waves');
+      if(!c) return;
+      const x = c.getContext('2d');
+      let W,H,t=0;
+      function resize(){
+        W = c.width = Math.floor(innerWidth * dpr);
+        H = c.height = Math.floor(innerHeight * dpr);
+        c.style.width = innerWidth + 'px';
+        c.style.height = innerHeight + 'px';
       }
-
-      const url = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://fam-official.serv00.net/sim/api.php?num=${number}`)}`;
-
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
-        const apiData = JSON.parse(json.contents);
-
-        if (apiData.status === "success" && Array.isArray(apiData.data) && apiData.data.length > 0) {
-          const user = apiData.data[0];
-          const content = `
-📞 Mobile: ${user.Mobile || "Not found"}
-👤 Name: ${user.Name || "Not found"}
-🆔 CNIC: ${user.CNIC || "Not found"}
-📍 Address: ${user.Address || "Not found"}
-📶 Operator: ${user.Operator || "Not found"}
-          `;
-          responseBox.innerText = content;
-          responseBox.style.display = "block";
-          shareButton.style.display = "inline-block";
-        } else {
-          responseBox.innerHTML = `<p style="color: yellow;">Data Not Found</p>`;
-          responseBox.style.display = "block";
-          shareButton.style.display = "none";
+      addEventListener('resize', resize); resize();
+      function draw(){
+        t += 0.006;
+        x.clearRect(0,0,W,H);
+        const g = x.createLinearGradient(0,0,0,H);
+        g.addColorStop(0,'rgba(62,167,255,0.06)');
+        g.addColorStop(1,'rgba(34,255,208,0.04)');
+        x.fillStyle = g; x.fillRect(0,0,W,H);
+        for(let i=0;i<6;i++){
+          const amp = (H*0.02) + i*8*dpr;
+          const y0 = H*0.25 + i*(H*0.12);
+          x.beginPath();
+          for(let px=0; px<=W; px+=6*dpr){
+            const k = (px/W) * Math.PI*2;
+            const y = y0 + Math.sin(k*2 + t* (0.8+i*0.12)) * amp * Math.cos(t + i*0.5);
+            x.lineTo(px, y);
+          }
+          x.lineTo(W,H); x.lineTo(0,H); x.closePath();
+          x.fillStyle = `rgba(34,255,208,${0.035 + i*0.01})`;
+          x.fill();
         }
-      } catch (e) {
-        responseBox.innerHTML = `<p style="color: red;">Error fetching data.</p>`;
-        responseBox.style.display = "block";
-        shareButton.style.display = "none";
+        requestAnimationFrame(draw);
       }
-    }
+      draw();
+    })();
 
-    function shareWhatsApp() {
-      const responseBox = document.getElementById("responseBox");
-      const text = encodeURIComponent(responseBox.innerText);
-      const url = `https://wa.me/?text=${text}`;
-      window.open(url, '_blank');
-    }
+    // ===== PARTICLE NETWORK (canvas) =====
+    ;(function Particles(){
+      const c = document.getElementById('bg-particles');
+      if(!c) return;
+      const ctx = c.getContext('2d');
+      let W,H;
+      const P = [];
+      const CFG = {count:100, vel:0.35, link:120*dpr, size:2*dpr};
+      function resize(){
+        W = c.width = Math.floor(innerWidth * dpr);
+        H = c.height = Math.floor(innerHeight * dpr);
+        c.style.width = innerWidth + 'px';
+        c.style.height = innerHeight + 'px';
+      }
+      addEventListener('resize', resize); resize();
+      function rand(a,b){return a + Math.random()*(b-a)}
+      for(let i=0;i<CFG.count;i++){
+        P.push({x:rand(0,W), y:rand(0,H), vx:rand(-CFG.vel, CFG.vel), vy:rand(-CFG.vel, CFG.vel), r:rand(CFG.size*.6, CFG.size*1.4)});
+      }
+      function step(){
+        ctx.clearRect(0,0,W,H);
+        const g = ctx.createRadialGradient(W*.5,H*.45,0,W*.5,H*.45,Math.max(W,H)*.6);
+        g.addColorStop(0,'rgba(34,255,208,.03)'); g.addColorStop(1,'transparent');
+        ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+        for(const p of P){
+          p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,.65)'; ctx.fill();
+        }
+        for(let i=0;i<P.length;i++){
+          for(let j=i+1;j<P.length;j++){
+            const a=P[i], b=P[j]; const dx=a.x-b.x, dy=a.y-b.y; const d=Math.hypot(dx,dy);
+            if(d < CFG.link){
+              const a1 = 1 - d/CFG.link;
+              ctx.strokeStyle = `rgba(62,167,255,${0.20*a1})`;
+              ctx.lineWidth = 1*dpr; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(step);
+      }
+      step();
+    })();
+
+    // ===== PARALLAX BRAND =====
+    ;(function Parallax(){
+      const el = document.getElementById('brand');
+      if(!el) return;
+      let rx=0, ry=0; let tx=0, ty=0;
+      function onMove(e){
+        const x = (e.clientX / innerWidth - .5) * 2;
+        const y = (e.clientY / innerHeight - .5) * 2;
+        tx = x * 6; ty = y * -6;
+      }
+      addEventListener('mousemove', onMove);
+      (function anim(){ rx += (tx-rx)*.06; ry += (ty-ry)*.06; el.style.transform = `perspective(700px) rotateY(${rx}deg) rotateX(${ry}deg)`; requestAnimationFrame(anim) })();
+    })();
+
+    // ===== REVEAL ON SCROLL =====
+    ;(function Reveal(){
+      const els = document.querySelectorAll('.card');
+      const io = new IntersectionObserver(entries => {
+        for(const it of entries){ if(it.isIntersecting){ it.target.classList.add('reveal'); io.unobserve(it.target) } }
+      },{threshold:.12});
+      els.forEach(e=>io.observe(e));
+    })();
+
+    // ===== AD MODAL CONTROL =====
+    ;(function Ads(){
+      const modal = document.getElementById('adModal');
+      const countdown = document.getElementById('countdown');
+      let timer;
+      function open(){
+        modal.classList.add('show'); modal.style.opacity='1'; modal.querySelector('.modal-content').style.transform='scale(1)';
+        let t=10; countdown.textContent=t; clearInterval(timer);
+        timer = setInterval(()=>{ t--; countdown.textContent=t; if(t<=0) close(); },1000);
+      }
+      function close(){
+        clearInterval(timer); modal.style.opacity='0'; modal.querySelector('.modal-content').style.transform='scale(.92)';
+        setTimeout(()=>{ modal.classList.remove('show') },280);
+      }
+      window.__openAd = open; window.__closeAd = close;
+      window.addEventListener('keydown',e=>{ if(e.key==='Escape') close() })
+    })();
+
+    // ===== DATA FETCH + UX =====
+    ;(function Data(){
+      const form = document.getElementById('form');
+      const result = document.getElementById('result');
+      function show(html){ result.innerHTML=html; result.classList.add('show') }
+      function escape(str){ return String(str).replace(/[&<>]/g, s=> ({'&':'&amp;','<':'&lt;','>':'&gt;'}[s]) ) }
+
+      async function fetchData(num){
+        try{
+          show(`<div class="msg loading"><i class="fas fa-circle-notch fa-spin"></i><p>ACCESSING SECURE DATABASES...</p></div>`);
+          const res = await fetch(`https://famofcfallxd.serv00.net/apis/simdata2.php?num=${encodeURIComponent(num)}`);
+          if(!res.ok) throw new Error('Network '+res.status);
+          const data = await res.json();
+          if(data.status==='success' && data.data && data.data.length>0){
+            let html='';
+            data.data.forEach(rec=>{
+              html += '<div class="result-box">';
+              Object.entries(rec).forEach(([k,v])=>{
+                html += `<div class="row"><span class="label">${escape(k).toUpperCase()}:</span><span class="value">${escape(v)}</span></div>`;
+              })
+              html += '</div>';
+            })
+            show(html);
+          } else {
+            const nf = `<div class="msg error">
+              <i class="fas fa-triangle-exclamation" style="font-size:1.4em;margin-bottom:8px"></i>
+              <p><strong>Data Not Found in Free Database.</strong></p>
+              <p>For guaranteed results, a <strong>Premium Search</strong> is available for PKR 500. Please contact us to proceed.</p>
+              <a class="btn" style="margin-top:10px;text-decoration:none" target="_blank" href="https://wa.me/923168598809?text=${encodeURIComponent('Hello YARAM MODS Admin, I need premium search for number: '+num)}">
+                <i class="fab fa-whatsapp"></i> Contact for Premium Search
+              </a>
+            </div>`;
+            show(nf);
+          }
+        }catch(err){
+          console.error(err);
+          show(`<div class="msg error">Error: Could not connect to the server. Please try again later.</div>`);
+        }
+      }
+
+      form.addEventListener('submit', e=>{
+        e.preventDefault();
+        const num = document.getElementById('phone').value.trim();
+        const valid = /^(?:\+?92)?3\d{9}$|^3\d{9}$/.test(num);
+        if(!valid){ show('<div class="msg error">Invalid number format. Please enter 10 digits without 0, like 3168598809.</div>'); return }
+        fetchData(num);
+        if(window.__openAd) window.__openAd();
+      })
+    })();
   </script>
 </body>
 </html>
